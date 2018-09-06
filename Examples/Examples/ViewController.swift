@@ -15,13 +15,11 @@ class ViewController: MessageViewController, UITableViewDataSource, UITableViewD
         .components(separatedBy: "|")
     let users = ["rnystrom", "BasThomas", "jessesquires", "Sherlouk", "omwomw"]
     var autocompleteUsers = [String]()
-    let tableView = UITableView()
-
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        view.addSubview(tableView)
 
         borderColor = .lightGray
 
@@ -92,6 +90,16 @@ class ViewController: MessageViewController, UITableViewDataSource, UITableViewD
             cell.textLabel?.text = autocompleteUsers[indexPath.row]
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 300
+        } else if indexPath.row == 1 {
+            return 150
+        } else {
+            return tableView.rowHeight
+        }
     }
 
     // MARK: UITableViewDelegate
